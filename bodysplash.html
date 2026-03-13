@@ -4,6 +4,18 @@
   <meta charset="utf-8" />
   <title>Body Splash - Scents and Slay Aesthetics</title>
   <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <!-- Basic Favicon -->
+  <link rel="icon" type="image/png" sizes="32x32" href="https://scentsandslayaesthetics.github.io/onlineshop/Logo.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="https://scentsandslayaesthetics.github.io/onlineshop/Logo.png">
+  <!-- Apple Touch Icon -->
+  <link rel="apple-touch-icon" sizes="180x180" href="https://scentsandslayaesthetics.github.io/onlineshop/Logo.png">
+  <!-- Android / Chrome -->
+  <link rel="icon" type="image/png" sizes="192x192" href="https://scentsandslayaesthetics.github.io/onlineshop/Logo.png">
+  <!-- Windows Tile -->
+  <meta name="msapplication-TileImage" content="https://scentsandslayaesthetics.github.io/onlineshop/Logo.png">
+  <meta name="msapplication-TileColor" content="#000000">
+  <!-- Theme Color (Mobile Browser Top Bar Color) -->
+  <meta name="theme-color" content="#000000">
   <!-- Font Awesome -->
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
   <style>
@@ -46,7 +58,7 @@
     .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border-width:0}
     footer{background:#222;color:#ddd;text-align:center;padding:18px;margin-top:28px}
     @media (max-width:768px){.category-box{display:none}.container{max-width:100%;padding:0 12px}}
-    @media (max-width:600px){nav a{display:none}.searchbar{flex-direction:column;width:100%}.searchbar input{width:100%;padding:10px 12px}.searchbar button{padding:10px 14px;min-height:44px}button.add{padding:12px 14px;min-height:44px}.cart-btn{padding:14px 18px;min-width:50px;min-height:50px}h1{font-size:20px}.modal{width:95vw}.footer{font-size:12px;padding:14px 8px}}
+    @media (max-width:600px){header{padding:12px 14px;flex-wrap:wrap}header h2{font-size:16px}nav{display:flex;gap:8px;flex-wrap:wrap}nav a{font-size:12px}nav a:not(:first-child){display:none}.searchbar{flex-direction:column;width:100%}.searchbar input{width:100%;padding:10px 12px}.searchbar button{padding:10px 14px;min-height:44px}button.add{padding:12px 14px;min-height:44px}.cart-btn{padding:14px 18px;min-width:50px;min-height:50px}h1{font-size:20px}.modal{width:95vw}.footer{font-size:12px;padding:14px 8px}}
     /* ===== CATEGORY BOX ===== */
     .category-box {
       width: 300px;
@@ -440,6 +452,17 @@
       document.querySelectorAll('.dropdown-content').forEach(dc => dc.style.display = 'none');
     }
   });
+   // Disable add buttons for out-of-stock cards (no valid data-price)
+      document.querySelectorAll('.card').forEach(card => {
+        const btn = card.querySelector('.add');
+        const price = parseFloat(card.dataset.price);
+        if(isNaN(price)){
+          btn.disabled = true;
+          btn.style.opacity = '0.6';
+          btn.style.cursor = 'not-allowed';
+          btn.textContent = 'Out of stock';
+        }
+      });
 </script>
 </body>
 </html>
